@@ -1,0 +1,46 @@
+<div class="container">
+  <form class="example-form" [formGroup]="queryForm" (submit)="searchByQuery()">
+    <mat-form-field appearance="fill">
+      <mat-label>Location name</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Ex. Rick"
+        value=""
+        formControlName="nameInput"
+        autocomplete="off"
+        (ngModelChange)="searchByQuery()"
+      />
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Dimension name</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Ex. Smth..."
+        formControlName="dimensionInput"
+        (ngModelChange)="searchByQuery()"
+      />
+    </mat-form-field>
+  </form>
+</div>
+
+<div class="container" *ngIf="!(locations$ | async)?.length">
+  <h1>No locations found</h1>
+</div>
+
+<div class="container" *ngIf="loading$ | async">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="locations$ | async as locations" class="container">
+  <mat-card *ngFor="let location of locations" class="example-card">
+    <mat-card-header>
+      <mat-card-title>{{ location.name }}</mat-card-title>
+      <mat-card-subtitle>Dimension: {{ location.dimension }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Resident count: {{ location.residents.length }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

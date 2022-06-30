@@ -1,0 +1,18 @@
+<button
+  mat-icon-button
+  [matMenuTriggerFor]="menu"
+  aria-label="Example icon-button with a menu"
+>
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item [routerLink]="['/users/']">
+    <mat-icon>dialpad</mat-icon>
+    <span>Characters</span>
+  </button>
+  <button mat-menu-item routerLink="/locations">
+    <mat-icon>voicemail</mat-icon>
+    <span>Locations</span>
+  </button>
+</mat-menu>
+<router-outlet></router-outlet>
